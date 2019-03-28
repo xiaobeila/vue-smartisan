@@ -25,7 +25,7 @@
             <ul>
               <li
                 class="clear"
-                v-for="(item,index) in carGoodsData"
+                v-for="(item,index) in carPanelData"
                 :key="index"
               >
                 <div class="cart-item js-cart-item cart-item-sell">
@@ -76,29 +76,45 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations } from 'vuex';
+
 export default {
   data () {
     return {
     };
   },
   computed: {
-    carGoodsData () {
-      return this.$store.state.carPanelData;
-    },
-    count () {
-      return this.$store.getters.totleCount;
-    },
-    totle () {
-      return this.$store.getters.totlePrice;
-    },
-    carShow () {
-      return this.$store.state.carShow;
-    }
+    // 辅助函数
+    ...mapState(['carPanelData', 'carShow'], {
+      count: 'totleCount'
+    }),
+    ...mapGetters({
+      count: 'totleCount',
+      totle: 'totlePrice'
+    })
+    // 为了能够使用 `this` 获取局部状态，必须使用 `常规函数`
+    // carPanelData () {
+    //   return this.$store.state.carPanelData;
+    // },
+    // count () {
+    //   return this.$store.getters.totleCount;
+    // },
+    // totle () {
+    //   return this.$store.getters.totlePrice;
+    // },
+    // carShow () {
+    //   return this.$store.state.carShow;
+    // }
   },
   methods: {
-    delCarPanelHandle (id) {
-      this.$store.commit('DEL_CAR_PANEL_DATA', id);
-    }
+    // 辅助函数
+    ...mapMutations({
+      delCarPanelHandle: 'DEL_CAR_PANEL_DATA'
+    })
+    // 常规函数
+    // delCarPanelHandle (id) {
+    //   this.$store.commit('DEL_CAR_PANEL_DATA', id);
+    // }
   }
 };
 </script>
