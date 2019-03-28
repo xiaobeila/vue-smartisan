@@ -33,10 +33,10 @@ const state = {
   orderData: [],
   maxOff: false,
   carShow: false,
-  ball: {
-    show: false,
-    el: null,
-    img: ''
+  ball: { // 加入购物车的动画小球
+    show: false, // 是否显示
+    el: null, // 点击元素
+    img: '' // 图片地址
   }
 };
 

@@ -60,6 +60,10 @@ const mutations = {
   // 隐藏购物车
   [types.HIDE_CAR] (state) {
     state.carShow = false;
+  },
+  // 修改小球状态
+  [types.UPDATA_BALL] (state) {
+    state.ball.show = false;
   }
 };
 

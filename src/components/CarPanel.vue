@@ -39,7 +39,7 @@
                 <div class="cart-item js-cart-item cart-item-sell">
                   <div class="cart-item-inner">
                     <div class="item-thumb">
-                      <img :src="item.ali_image+'?x-oss-process=image/resize,w_80/quality,Q_100/format,webp'">
+                      <img :src="item.ali_image+'?x-oss-process=image/resize,w_80/quality,Q_100/format,webp'" />
                     </div>
                     <div class="item-desc">
                       <div class="cart-cell">
@@ -80,6 +80,20 @@
         </div>
       </div>
     </div>
+    <transition
+      name="ball"
+      v-on:before-enter="beforeEnter"
+      v-on:enter="enter"
+      v-on:after-enter="updataBall"
+      v-bind:css="true"
+    >
+      <div
+        class="addcart-mask"
+        v-show="ball.show"
+      >
+        <img class="mask-item" />
+      </div>
+    </transition>
   </li>
 </template>
 
@@ -93,7 +107,7 @@ export default {
   },
   computed: {
     // 辅助函数
-    ...mapState(['carPanelData', 'carShow']),
+    ...mapState(['carPanelData', 'carShow', 'ball']),
     ...mapGetters({
       count: 'totleCount',
       totle: 'totlePrice'
@@ -115,7 +129,8 @@ export default {
   methods: {
     // 辅助函数
     ...mapMutations({
-      delCarPanelHandle: 'DEL_CAR_PANEL_DATA'
+      delCarPanelHandle: 'DEL_CAR_PANEL_DATA',
+      updataBall: 'UPDATA_BALL'
     }),
     // 常规函数
     // delCarPanelHandle (id) {
@@ -129,6 +144,30 @@ export default {
       this.iTimer = setTimeout(() => {
         this.$store.commit('HIDE_CAR');
       }, 500);
+    },
+    // 动画进入中
+    beforeEnter (el) {
+      // 目标坐标 获取某个元素相对于视窗的位置集合
+      let rect = this.ball.el.getBoundingClientRect();
+      // console.log(rect);
+      // 购物车坐标
+      let rectEl = document.getElementsByClassName('ball-rect')[0].getBoundingClientRect();
+      // console.log(rectEl);
+      // 小球
+      let ball = document.getElementsByClassName('mask-item')[0];
+      // console.log(ball);
+      let x = (rectEl.left + 16) - (rect.left + rect.width / 2);
+      let y = rect.top + rect.height / 2 - rectEl.top + 5 - 16;
+      el.style.transform = 'translate3d(0,' + y + 'px,0)';
+      ball.style.transform = 'translate3d(-' + x + 'px,0,0)';
+      ball.src = this.ball.img;
+    },
+    enter (el) {
+      this.$nextTick(() => {
+        el.style.transform = 'translate3d(0,0,0)';
+        document.getElementsByClassName('mask-item')[0].style.transform = 'translate3d(0,0,0)';
+      });
+      return el.offsetHeight;
     }
   }
 };
@@ -459,5 +498,37 @@ export default {
   text-align: center;
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* 小球样式 */
+.nav-global .addcart-mask {
+  position: absolute;
+  left: 0;
+  top: -5px;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+  z-index: 240;
+  transform: translate3d(0, 0, 0);
+}
+.nav-global .addcart-mask .mask-item {
+  pointer-events: none;
+  width: 32px;
+  height: 32px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 3px 8px rgba(0, 0, 0, 0.1);
+  background-size: contain;
+  transform: translate3d(0, 0, 0);
+}
+
+.ball-enter-active {
+  transition: 0.5s cubic-bezier(0.15, 0.69, 0.6, 1.29);
+}
+.ball-enter-active .mask-item {
+  transition: 0.5s cubic-bezier(0, 0, 1, 1);
 }
 </style>

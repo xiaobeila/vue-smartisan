@@ -12,3 +12,6 @@ export const SHOW_CAR = 'SHOW_CAR';
 
 // 隐藏购物车
 export const HIDE_CAR = 'HIDE_CAR';
+
+// 修改小球状态
+export const UPDATA_BALL = 'UPDATA_BALL';
