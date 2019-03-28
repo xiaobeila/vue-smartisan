@@ -1,6 +1,14 @@
 <template>
-  <li class="nav-cart">
-    <a href="javascript:;">购物车</a>
+  <li
+    class="nav-cart"
+    @mouseenter="showCarHandle"
+    @mouseleave="hideCarHandle"
+  >
+    <a
+      href="javascript:;"
+      class="ball-rect"
+      title="购物车"
+    ></a>
     <!--根据class改变颜色-->
     <span
       class="cart-empty-num"
@@ -42,7 +50,7 @@
                           <span>{{item.spec_json.show_name}}</span>
                         </p>
                         <h6>
-                          <span class="price-icon">¥</span><span class="price-num">{{item.price}}</span><span class="item-num">x 1</span>
+                          <span class="price-icon">¥</span><span class="price-num">{{item.price}}</span><span class="item-num">x {{item.count}}</span>
                         </h6>
                       </div>
                     </div>
@@ -85,9 +93,7 @@ export default {
   },
   computed: {
     // 辅助函数
-    ...mapState(['carPanelData', 'carShow'], {
-      count: 'totleCount'
-    }),
+    ...mapState(['carPanelData', 'carShow']),
     ...mapGetters({
       count: 'totleCount',
       totle: 'totlePrice'
@@ -101,7 +107,7 @@ export default {
     // },
     // totle () {
     //   return this.$store.getters.totlePrice;
-    // },
+    // }
     // carShow () {
     //   return this.$store.state.carShow;
     // }
@@ -110,11 +116,20 @@ export default {
     // 辅助函数
     ...mapMutations({
       delCarPanelHandle: 'DEL_CAR_PANEL_DATA'
-    })
+    }),
     // 常规函数
     // delCarPanelHandle (id) {
     //   this.$store.commit('DEL_CAR_PANEL_DATA', id);
     // }
+    showCarHandle () {
+      clearTimeout(this.iTimer);
+      this.$store.commit('SHOW_CAR');
+    },
+    hideCarHandle () {
+      this.iTimer = setTimeout(() => {
+        this.$store.commit('HIDE_CAR');
+      }, 500);
+    }
   }
 };
 </script>
