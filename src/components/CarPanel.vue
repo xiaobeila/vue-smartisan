@@ -56,7 +56,7 @@
             </ul>
           </div>
           <div class="nav-cart-total">
-            <p>共 <strong class="ng-binding">1</strong> 件商品</p>
+            <p>共 <strong class="ng-binding">{{count}}</strong> 件商品</p>
             <h5>合计：<span class="price-icon">¥</span><span
                 class="price-num ng-binding"
                 ng-bind="cartMenu.totalPrice"
@@ -89,8 +89,7 @@ export default {
       return this.$store.getters.totleCount;
     },
     totle () {
-      this.$store.dispatch('totlePrice');
-      return this.$store.state.totlePrice;
+      return this.$store.getters.totlePrice;
     },
     carShow () {
       return this.$store.state.carShow;

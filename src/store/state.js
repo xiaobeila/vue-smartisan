@@ -33,7 +33,6 @@ const state = {
   orderData: [],
   maxOff: false,
   carShow: false,
-  totlePrice: 0, // 购物车统计数
   ball: {
     show: false,
     el: null,

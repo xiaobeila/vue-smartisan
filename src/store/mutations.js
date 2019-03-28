@@ -33,14 +33,6 @@ const mutations = {
         state.carPanelData.splice(index, 1);
       }
     });
-  },
-  // 统计购物车
-  [types.TOTLE_PRICE] (state) {
-    let total = 0;
-    state.carPanelData.forEach((goods) => {
-      total += goods.price * goods.count;
-    });
-    state.totlePrice = total;
   }
 };
 
