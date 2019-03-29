@@ -27,12 +27,26 @@ export const asyncRouterMap = [{
 }, {
   path: '/',
   component: layout,
-  redirect: '/home',
+  redirect: '/shop/index',
   children: [{
-    path: 'home',
-    component: _import('home/index')
+    path: 'shop',
+    component: _import('shop/index')
   }]
-}];
+},
+{
+  path: '/shop',
+  component: layout,
+  children: [{
+    path: 'index',
+    component: _import('shop/index')
+  },
+  {
+    path: 'detail',
+    component: _import('shop/detail')
+  }
+  ]
+}
+];
 
 export default new Router({
   mode: 'history',

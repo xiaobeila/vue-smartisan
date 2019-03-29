@@ -29,9 +29,8 @@ const state = {
     'default': false,
     'checked': false
   }],
-  provisionalOrder: [],
+  provisionalOrder: [], // 购物车数据
   orderData: [],
-  maxOff: false,
   carShow: false,
   ball: { // 加入购物车的动画小球
     show: false, // 是否显示

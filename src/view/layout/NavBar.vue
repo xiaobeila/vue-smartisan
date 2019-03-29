@@ -3,7 +3,7 @@
     <div class="nav-sub-wrapper">
       <div class="container">
         <ul class="nav-list">
-          <li><a href="javascript:;">首页</a></li>
+          <li><a href="/">首页</a></li>
           <li><a href="javascript:;">手机</a></li>
           <li><a href="javascript:;">“足迹系列”手感膜</a></li>
           <li class="active"><a href="javascript:;">官方配件</a></li>

@@ -26,10 +26,9 @@
         </ul>
       </div>
       <div class="item-btns clearfix">
-        <span class="item-gray-btn"><a
-            href="javascript:;"
-            target="_blank"
-          >查看详情</a> </span>
+        <span class="item-gray-btn">
+          <router-link :to="{path: '/shop/detail', query: {id:item.sku_info[itemIndex].sku_id}}">查看详情</router-link>
+        </span>
         <span
           @click="addCarPanelHandle(item.sku_info[itemIndex])"
           class="item-blue-btn"

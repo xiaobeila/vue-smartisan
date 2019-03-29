@@ -38,7 +38,7 @@
 import goodData from 'api/goodData';
 import ListItem from 'components/ListItem';
 export default {
-  name: 'home',
+  name: 'index',
   data () {
     return {
       goodData: goodData
