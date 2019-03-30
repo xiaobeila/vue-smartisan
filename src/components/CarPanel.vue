@@ -70,11 +70,10 @@
                 ng-bind="cartMenu.totalPrice"
               >{{totle}}</span></h5>
             <h6>
-              <a
-                ng-href="http://www.smartisan.com/shop/#/cart"
+              <router-link
+                :to="{path: '/shop/cart'}"
                 class="nav-cart-btn"
-                href="http://www.smartisan.com/shop/#/cart"
-              >去购物车</a>
+              >去购物车</router-link>
             </h6>
           </div>
         </div>

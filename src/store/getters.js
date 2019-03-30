@@ -15,3 +15,25 @@ export const totlePrice = state => {
   });
   return total;
 };
+
+// 统计购物车选中的数量
+export const checkedCount = state => {
+  let counta = 0;
+  state.carPanelData.forEach((goods) => {
+    if (goods.checked) {
+      counta += goods.count;
+    }
+  });
+  return counta;
+};
+
+// 统计购物车选中的价格
+export const checkedTotle = state => {
+  let total = 0;
+  state.carPanelData.forEach((goods) => {
+    if (goods.checked) {
+      total += goods.price * goods.count;
+    }
+  });
+  return total;
+};

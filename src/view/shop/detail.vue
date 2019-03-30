@@ -144,7 +144,17 @@ export default {
     },
     // 去支付
     toPayment () {
-
+      let itemsInfo = this.itemsInfo;
+      itemsInfo.count = this.count;
+      let provisionalOrder = {
+        totlePrice: this.count * this.itemsInfo.price,
+        totleCount: this.count,
+        items: [itemsInfo]
+      };
+      this.$store.commit('PROVISIONAL_ORDER', provisionalOrder);
+      this.$router.push({
+        path: `/shop/cart`
+      });
     }
   }
 };

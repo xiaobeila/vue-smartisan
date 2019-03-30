@@ -94,6 +94,7 @@ let goodData = [{
     ali_image: 'http://image.smartisanos.cn/resource/ae40a16324658c192c7361d829f603bd.jpg',
     direct_to_cart: !0,
     price: '199.00',
+    limit_num: 5,
     spec_json: [{
       spec_id: '1',
       spec_value_id: '70',
@@ -239,6 +240,7 @@ let goodData = [{
     ali_image: 'http://image.smartisanos.cn/resource/f6f081615fdd6f92206c3d127501843a.jpg',
     direct_to_cart: !0,
     price: '49.00',
+    limit_num: 5,
     spec_json: [{
       spec_id: '1',
       spec_value_id: '211',
@@ -390,6 +392,7 @@ let goodData = [{
     ali_image: 'http://image.smartisanos.cn/resource/3802197aa7e78f9429eb5f6048a25047.jpg',
     direct_to_cart: !0,
     price: '49.00',
+    limit_num: 5,
     spec_json: [{
       spec_id: '1',
       spec_value_id: '36',
@@ -535,6 +538,7 @@ let goodData = [{
     ali_image: 'http://image.smartisanos.cn/resource/30cacf4088f7105d16452c661afd9299.jpg',
     direct_to_cart: !0,
     price: '49.00',
+    limit_num: 5,
     spec_json: [{
       spec_id: '1',
       spec_value_id: '211',
@@ -668,6 +672,7 @@ let goodData = [{
     ali_image: 'http://image.smartisanos.cn/resource/902befd5f32a8caf4ca79b55d39ee25a.jpg',
     direct_to_cart: !0,
     price: '49.00',
+    limit_num: 5,
     spec_json: [{
       spec_id: '1',
       spec_value_id: '35',
@@ -834,6 +839,7 @@ let goodData = [{
     ali_image: 'http://image.smartisanos.cn/resource/1dddddf6488ba89d592a37e9db93ffa2.jpg',
     direct_to_cart: !0,
     price: '19.00',
+    limit_num: 5,
     spec_json: [{
       spec_id: '1',
       spec_value_id: '37',
@@ -949,6 +955,7 @@ let goodData = [{
     ali_image: 'http://image.smartisanos.cn/resource/dc53bd870ee64d2053ecc51750ece43a.jpg',
     direct_to_cart: !0,
     price: '59.00',
+    limit_num: 5,
     spec_json: [{
       spec_id: '1',
       spec_value_id: '37',
@@ -1064,6 +1071,7 @@ let goodData = [{
     ali_image: 'http://image.smartisanos.cn/resource/c79a73ffc6f8e782160d978f49f543dc.jpg',
     direct_to_cart: !0,
     price: '39.00',
+    limit_num: 5,
     spec_json: [{
       spec_id: '1',
       spec_value_id: '37',

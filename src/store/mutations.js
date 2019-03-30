@@ -64,6 +64,46 @@ const mutations = {
   // 修改小球状态
   [types.UPDATA_BALL] (state) {
     state.ball.show = false;
+  },
+  // 订单页数据
+  [types.PROVISIONAL_ORDER] (state, data) {
+    state.provisionalOrder = data;
+  },
+  // 购物车-数量修改(加)
+  [types.ADD_COUNT_PANEL_DATA] (state, id) {
+    state.carPanelData.forEach((goods, index) => {
+      if (goods.sku_id === id) {
+        if (goods.count >= goods.limit_num) return;
+        goods.count++;
+      }
+    });
+  },
+  // 购物车-数量修改(减)
+  [types.SUB_COUNT_PANEL_DATA] (state, id) {
+    state.carPanelData.forEach((goods, index) => {
+      if (goods.sku_id === id) {
+        if (goods.count <= 1) return;
+        goods.count--;
+      }
+    });
+  },
+  // 购物车-选中状态
+  [types.CHECK_GOODS_HANDLE] (state, id) {
+    state.carPanelData.forEach((goods) => {
+      if (goods.sku_id === id) {
+        console.log(goods.checked);
+        goods.checked = !goods.checked;
+      }
+    });
+  },
+  // 购物车-删除选中商品
+  [types.DEL_CHECK_GOODS_HANDLE] (state) {
+    let i = state.carPanelData.length;
+    while (i--) {
+      if (state.carPanelData[i].checked) {
+        state.carPanelData.splice(i, 1);
+      }
+    }
   }
 };
 

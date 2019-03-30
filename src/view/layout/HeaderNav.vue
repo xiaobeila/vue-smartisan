@@ -3,7 +3,7 @@
     <div class="nav-global">
       <div class="container">
         <h1 class="nav-logo">
-          <a href="/"></a>
+          <router-link :to="{path: '/shop'}"></router-link>
         </h1>
         <ul class="nav-aside">
           <li class="nav-user">

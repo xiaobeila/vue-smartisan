@@ -29,7 +29,11 @@ const state = {
     'default': false,
     'checked': false
   }],
-  provisionalOrder: [], // 购物车数据
+  provisionalOrder: [{
+    totlePrice: 0,
+    totleCount: 0,
+    items: []
+  }], // 购物车数据
   orderData: [],
   carShow: false,
   ball: { // 加入购物车的动画小球
