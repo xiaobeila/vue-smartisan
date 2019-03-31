@@ -30,3 +30,6 @@ export const CHECK_GOODS_HANDLE = 'CHECK_GOODS_HANDLE';
 
 // 购物车-删除选中商品
 export const DEL_CHECK_GOODS_HANDLE = 'DEL_CHECK_GOODS_HANDLE';
+
+// 购物车-全选按钮
+export const ALL_GOODS_CHECKED_HANDLE = 'ALL_GOODS_CHECKED_HANDLE';

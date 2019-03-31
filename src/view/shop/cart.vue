@@ -94,8 +94,11 @@
           <div class="cart-bar-operation">
             <div>
               <div class="choose-all js-choose-all">
-                <span class="blue-checkbox-new checkbox-on"><a></a></span>
-                全选
+                <span
+                  class="blue-checkbox-new"
+                  :class="{'checkbox-on':allChecked}"
+                  @click="allGoodsCheckHandle(allChecked)"
+                ><a></a></span> 全选
               </div>
               <div
                 class="delete-choose-goods"
@@ -147,7 +150,7 @@ export default {
   },
   computed: {
     ...mapState(['carPanelData']),
-    ...mapGetters(['checkedCount', 'totleCount', 'checkedTotle'])
+    ...mapGetters(['checkedCount', 'totleCount', 'checkedTotle', 'allChecked'])
   },
   components: {
     prompt
@@ -158,9 +161,20 @@ export default {
       subCount: 'SUB_COUNT_PANEL_DATA',
       checkGoodsHandle: 'CHECK_GOODS_HANDLE',
       delCarPanelHandle: 'DEL_CAR_PANEL_DATA',
-      delCheckGoodsHandle: 'DEL_CHECK_GOODS_HANDLE'
+      delCheckGoodsHandle: 'DEL_CHECK_GOODS_HANDLE',
+      allGoodsCheckHandle: 'ALL_GOODS_CHECKED_HANDLE'
     }),
     checkOutHandle () {
+      let items = this.$store.state.carPanelData.filter((item) => {
+        return item.checked;
+      });
+      let provisionalOrder = {
+        totlePrice: this.checkedTotle,
+        totleCount: this.checkedCount,
+        items: items
+      };
+      this.$store.commit('PROVISIONAL_ORDER', provisionalOrder);
+      this.$router.push({ path: 'payment' });
     }
   }
 };
@@ -410,7 +424,7 @@ export default {
 }
 .select .down.down-disabled,
 .select .down.down-disabled:hover {
-  background-position: 0 -316px;
+  background-position: 0 -314px;
   cursor: not-allowed;
 }
 .select .num {

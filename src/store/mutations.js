@@ -91,7 +91,6 @@ const mutations = {
   [types.CHECK_GOODS_HANDLE] (state, id) {
     state.carPanelData.forEach((goods) => {
       if (goods.sku_id === id) {
-        console.log(goods.checked);
         goods.checked = !goods.checked;
       }
     });
@@ -104,6 +103,12 @@ const mutations = {
         state.carPanelData.splice(i, 1);
       }
     }
+  },
+  // 购物车-全选按钮
+  [types.ALL_GOODS_CHECKED_HANDLE] (state) {
+    state.carPanelData.forEach((goods) => {
+      goods.checked = !goods.checked;
+    });
   }
 };
 

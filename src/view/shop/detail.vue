@@ -153,7 +153,7 @@ export default {
       };
       this.$store.commit('PROVISIONAL_ORDER', provisionalOrder);
       this.$router.push({
-        path: `/shop/cart`
+        path: `/shop/payment`
       });
     }
   }

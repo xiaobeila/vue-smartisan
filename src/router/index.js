@@ -47,6 +47,10 @@ export const asyncRouterMap = [{
   {
     path: 'cart',
     component: _import('shop/cart')
+  },
+  {
+    path: 'payment',
+    component: _import('shop/payment')
   }
   ]
 }

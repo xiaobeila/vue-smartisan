@@ -37,3 +37,23 @@ export const checkedTotle = state => {
   });
   return total;
 };
+
+// 统计购物车全选中状态
+export const allChecked = state => {
+  let allChecked = true;
+  state.carPanelData.map((goods) => {
+    if (!goods.checked) {
+      allChecked = false;
+    }
+  });
+  return allChecked;
+};
+
+// 统计订单价格
+export const paymentPrice = state => {
+  let total = 0;
+  state.provisionalOrder.items.forEach((goods) => {
+    total += goods.price * goods.count;
+  });
+  return total;
+};
