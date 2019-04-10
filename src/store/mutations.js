@@ -109,6 +109,26 @@ const mutations = {
     state.carPanelData.forEach((goods) => {
       goods.checked = !goods.checked;
     });
+  },
+  // 订单页-默认地址选中
+  [types.CHECKED_RECEIVEINFO] (state) {
+    state.receiveInfo.forEach((receive, index) => {
+      if (receive.default) {
+        receive.checked = true;
+        state.receiveInfo.unshift(state.receiveInfo.splice(index, 1)[0]);
+      } else {
+        receive.checked = false;
+      }
+    });
+  },
+  // 订单页-地址选择
+  [types.SELECTED_ADDRESS] (state, item) {
+    if (!item.checked) {
+      state.receiveInfo.forEach((receive) => {
+        receive.checked = false;
+      });
+      item.checked = true;
+    }
   }
 };
 

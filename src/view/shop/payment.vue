@@ -14,6 +14,7 @@
                   :class="{'selected-address-item':item.checked}"
                   v-for="(item,index) in receiveInfo"
                   :key="index"
+                  @click="selectedAddress(item)"
                 >
                   <div class="address-item">
                     <div class="name-section"> {{item.name}} </div>
@@ -116,7 +117,7 @@
         <div class="box-inner">
           <div class="order-discount-line">
             <p> 商品总计： <span>¥ {{paymentPrice}}</span> </p>
-            <p> 运费： <span>+  ¥ {{freight}}</span> </p>
+            <p> 运费： <span>+ ¥ {{freight}}</span> </p>
             <!-- <p class="discount-line js-discount-cash"> <em>现金券</em>： <span> - 0 </span> </p> -->
           </div>
         </div>
@@ -131,7 +132,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { mapState, mapGetters, mapMutations } from 'vuex';
 
 export default {
   name: 'payment',
@@ -141,14 +142,7 @@ export default {
     };
   },
   created () {
-    this.$store.state.receiveInfo.forEach((receive, index) => {
-      if (receive.default) {
-        receive.checked = true;
-        // this.$store.state.receiveInfo.unshift(this.$store.state.receiveInfo.splice(index, 1)[0]);
-      } else {
-        receive.checked = false;
-      }
-    });
+    this.checkedReceiveInfo();
     this.receiveInfo = this.$store.state.receiveInfo;
   },
   computed: {
@@ -163,7 +157,10 @@ export default {
     }
   },
   methods: {
-
+    ...mapMutations({
+      selectedAddress: 'SELECTED_ADDRESS',
+      checkedReceiveInfo: 'CHECKED_RECEIVEINFO'
+    })
   }
 };
 </script>

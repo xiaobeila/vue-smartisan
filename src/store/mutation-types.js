@@ -33,3 +33,9 @@ export const DEL_CHECK_GOODS_HANDLE = 'DEL_CHECK_GOODS_HANDLE';
 
 // 购物车-全选按钮
 export const ALL_GOODS_CHECKED_HANDLE = 'ALL_GOODS_CHECKED_HANDLE';
+
+// 订单页-地址选择
+export const SELECTED_ADDRESS = 'SELECTED_ADDRESS';
+
+// 订单页-默认地址选中
+export const CHECKED_RECEIVEINFO = 'CHECKED_RECEIVEINFO';

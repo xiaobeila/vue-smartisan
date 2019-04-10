@@ -12,8 +12,8 @@ const state = {
     'countyId': 110106,
     'county': '海淀区',
     'add': '上地十街辉煌国际西6号楼319室',
-    'default': true,
-    'checked': true
+    'default': false,
+    'checked': false
   }, {
     'name': '李某某',
     'phone': '13811111111',
@@ -26,8 +26,8 @@ const state = {
     'countyId': 110106,
     'county': '海淀区',
     'add': '上地十街辉煌国际东6号楼350室',
-    'default': false,
-    'checked': false
+    'default': true,
+    'checked': true
   }],
   provisionalOrder: [{
     totlePrice: 0,

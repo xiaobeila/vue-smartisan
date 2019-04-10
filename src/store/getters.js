@@ -52,8 +52,10 @@ export const allChecked = state => {
 // 统计订单价格
 export const paymentPrice = state => {
   let total = 0;
-  state.provisionalOrder.items.forEach((goods) => {
-    total += goods.price * goods.count;
-  });
+  if (state.provisionalOrder && state.provisionalOrder.items) {
+    state.provisionalOrder.items.forEach((goods) => {
+      total += goods.price * goods.count;
+    });
+  }
   return total;
 };
