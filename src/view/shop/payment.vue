@@ -1,171 +1,110 @@
 <template>
   <div id="main">
-    <div class="content page-order-checkout checkout">
-      <div class="js-checkout-address-box">
-        <div class="gray-box clear">
-          <div class="title columns-title pre-title">
-            <h2>收货信息</h2>
-          </div>
-          <div class="box-inner js-checkout-address-panel ">
-            <div class="address-common-table js-multiple-address-panel">
-              <ul class="address-item-list clear js-address-item-list">
-                <li
-                  class="js-choose-address"
-                  :class="{'selected-address-item':item.checked}"
-                  v-for="(item,index) in receiveInfo"
-                  :key="index"
-                  @click="selectedAddress(item)"
-                >
-                  <div class="address-item">
-                    <div class="name-section"> {{item.name}} </div>
-                    <div class="mobile-section">{{item.phone}}</div>
-                    <div class="detail-section"> {{item.province}} {{item.county}} {{item.city}} {{item.add}} </div>
-                  </div>
-                  <div class="operation-section">
-                    <span class="update-btn js-edit-address">修改</span>
-                    <span class="delete-btn js-delete-address">删除</span>
-                  </div>
-                </li>
-                <li class="add-address-item js-add-address">
-                  <p>使用新地址</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="gray-box">
+    <div class="content page-order-payment">
+      <div class="gray-box clear">
         <div class="title">
-          <h2>发票信息</h2>
+          <h2>支付订单</h2>
         </div>
-        <div class="box-inner invoice-box js-invoice-box">
-          <p class="invoice-detail"> 发票类型：电子发票 </p>
-          <div class="invoice-detail"> 发票抬头：
-            <div class="radio-box">
-              <label>
-                <input
-                  type="radio"
-                  class="hide"
-                >
-                <span class="blue-radio blue-radio-on"><a></a></span> 个人
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  class="hide"
-                >
-                <span class="blue-radio"><a></a></span> 单位
-              </label>
-            </div>
-            <div class="module-form-row form-item fn-hide js-invoice-title">
-              <div class="module-form-item-wrapper no-icon small-item">
-                <i>请填写公司发票抬头</i>
-                <input
-                  type="text"
-                  class="js-verify"
-                >
-              </div>
-            </div>
-          </div>
-          <p class="invoice-detail">发票内容：购买商品明细</p>
-          <p class="invoice-label"> 电子发票是税务局认可的有效收付款凭证，可作为售后服务凭据。电子发票打印后可以用于企业报销。 </p>
+        <div class="box-inner order-info">
+          <h3>提交订单成功</h3>
+          <p class="payment-detail">请在 <span>24 小时内</span>完成支付，超时订单将自动取消。</p>
+          <p class="payment-detail">我们将在您完成支付后的 72 小时内发货</p>
+        </div>
+        <div class="box-inner payment-checkout-panel clear">
+          <span class="jianguo-blue-main-btn big-main-btn js-payment-order">
+            <a>现在支付</a>
+          </span>
+          <span class="prices"> 应付金额： <em><span>¥ </span>{{orderInfo.price+orderInfo.freight}}</em> </span>
         </div>
       </div>
-      <div class="gray-box">
-        <div class="title pre-title">
-          <h2>购物清单</h2>
-        </div>
-        <div class="box-inner ui-goods-cart">
-          <div class="gray-sub-title cart-table-title">
-            <span class="name">商品名称</span>
-            <span class="subtotal">小计</span>
-            <span class="num">数量</span>
-            <span class="price">单价</span>
-          </div>
-          <div class="cart-table">
-            <div class="cart-group js-cart-group">
-              <div
-                class="cart-items"
-                v-for="(item,index) in provisionalOrder.items"
-                :key="index"
-              >
-                <div class="items-thumb">
-                  <a
-                    href="javascript:;"
-                    target="_blank"
-                  ><img :src="item.ali_image+'?x-oss-process=image/resize,w_80/quality,Q_100/format,webp'" /></a>
-                </div>
-                <div class="name hide-row">
-                  <div class="name-cell">
-                    <a
-                      href="javascript:;"
-                      :title="item.title+'（'+item.spec_json[0].show_name+'）'"
-                      target="_blank"
-                    >{{item.title}}（{{item.spec_json[0].show_name}}）</a>
-                  </div>
-                </div>
-                <div class="subtotal">
-                  <div class="subtotal-cell"> ¥ {{item.price*item.count}} </div>
-                </div>
-                <div class="goods-num">{{item.count}}</div>
-                <div class="price">¥ {{item.price}}</div>
-              </div>
+      <div class="confirm-detail">
+        <div class="info-title">订单编号</div>
+        <p class="info-detail">170620718648448</p>
+      </div>
+      <div class="confirm-detail">
+        <div class="info-title">收货信息</div>
+        <p class="info-detail">姓名：王某某</p>
+        <p class="info-detail">联系电话：13811111111</p>
+        <p class="info-detail">详细地址：北京市市辖区海淀区上地十街辉煌国际西6号楼319室</p>
+      </div>
+      <!-- <div class="confirm-detail">
+        <div class="info-title">发票信息</div>
+        <p class="info-detail">发票类型：电子发票</p>
+        <p class="info-detail">发票抬头：个人</p>
+        <p class="info-detail">发票内容：购买商品明细</p>
+      </div> -->
+      <div class="confirm-table-title clear">
+        <span class="name fn-left">商品信息</span>
+        <span class="subtotal fn-right">小计</span>
+        <span class="num fn-right">数量</span>
+        <span class="price fn-right">单价</span>
+      </div>
+      <div class="confirm-goods-table">
+        <div class="cart-items clear">
+          <div class="name fn-left hide-row">
+            <div class="name-cell">
+              <a
+                href="http://www.smartisan.com/shop/#/item/100029901"
+                title="Smartisan 快充移动电源 10000mAh（灰色）"
+                target="_blank"
+              >Smartisan 快充移动电源 10000mAh（灰色）</a><br>
             </div>
           </div>
-
-        </div>
-        <div class="box-inner">
-          <div class="order-discount-line">
-            <p> 商品总计： <span>¥ {{paymentPrice}}</span> </p>
-            <p> 运费： <span>+ ¥ {{freight}}</span> </p>
-            <!-- <p class="discount-line js-discount-cash"> <em>现金券</em>： <span> - 0 </span> </p> -->
+          <div class="subtotal fn-right">
+            <div class="subtotal-cell">¥ 199.00</div>
           </div>
+          <div class="goods-num fn-right">1</div>
+          <div class="price fn-right">¥ 199.00</div>
         </div>
-        <div class="box-inner">
-          <div class="last-payment clear">
-            <span class="jianguo-blue-main-btn big-main-btn payment-blue-bt fn-right js-checkout"> <a>提交订单</a> </span> <span class="prices fn-right">应付金额： <em>¥ {{paymentPrice+freight}}</em></span>
+        <div class="cart-items clear">
+          <div class="name fn-left hide-row">
+            <div class="name-cell">
+              <a
+                href="http://www.smartisan.com/shop/#/item/100029901"
+                title="Smartisan 快充移动电源 10000mAh（灰色）"
+                target="_blank"
+              >Smartisan 快充移动电源 10000mAh（灰色）</a><br>
+            </div>
           </div>
+          <div class="subtotal fn-right">
+            <div class="subtotal-cell">¥ 199.00</div>
+          </div>
+          <div class="goods-num fn-right">1</div>
+          <div class="price fn-right">¥ 199.00</div>
         </div>
+      </div>
+      <div class="order-discount-line">
+        <p> 商品总计： <span>¥ 199.00</span> </p>
+        <p> 运费： <span>+ ¥ 0.00</span> </p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex';
-
 export default {
   name: 'payment',
   data () {
     return {
-      receiveInfo: []
+
     };
   },
-  created () {
-    this.checkedReceiveInfo();
-    this.receiveInfo = this.$store.state.receiveInfo;
-  },
   computed: {
-    ...mapState(['provisionalOrder']),
-    ...mapGetters(['paymentPrice']),
-    freight () {
-      let freight = 8;
-      if (this.$store.state.provisionalOrder.totlePrice > 88) {
-        freight = 0;
-      }
-      return freight;
+    orderInfo () {
+      console.log(this.$route.query.orderId);
+      let orderInfo = this.$store.state.orderData.filter((order) => {
+        return order.orderId === this.$route.query.orderId;
+      })[0];
+      return orderInfo;
     }
-  },
-  methods: {
-    ...mapMutations({
-      selectedAddress: 'SELECTED_ADDRESS',
-      checkedReceiveInfo: 'CHECKED_RECEIVEINFO'
-    })
   }
 };
 </script>
 
 <style scoped>
+.header-desktop {
+  display: none;
+}
 .content {
   clear: both;
   width: 1220px;
@@ -173,27 +112,23 @@ export default {
   padding: 0 0 25px;
   margin: 0 auto;
 }
-.page-order-checkout {
-  padding-top: 40px;
+.page-order-payment {
+  padding-top: 39px;
 }
-.checkout .gray-box {
+.gray-box {
   overflow: hidden;
   border: 1px solid #d1d1d1;
   border-color: rgba(0, 0, 0, 0.14);
   border-radius: 8px;
   box-shadow: 0 3px 8px -6px rgba(0, 0, 0, 0.1);
-}
-.checkout .gray-box,
-.gray-btn-menu-on:hover {
   background: #fff;
 }
-.checkout .gray-box {
-  margin-bottom: 30px;
+.page-order-payment .gray-box {
+  margin: 0 auto 60px;
 }
-.checkout .gray-box .title {
+.gray-box .title {
   height: 60px;
   padding: 0 10px 0 28px;
-  background: #f5f5f5;
   background: linear-gradient(#fff, #f5f5f5);
   border-bottom: 1px solid #dcdcdc;
   border-radius: 10px 10px 0 0;
@@ -201,385 +136,48 @@ export default {
   line-height: 60px;
   color: #646464;
 }
-.checkout .gray-box .pre-title {
-  position: relative;
-  z-index: 2;
-}
-.checkout .gray-box .title h2 {
+.gray-box .title h2 {
   font-size: 18px;
   font-weight: 400;
   color: #626262;
 }
-.checkout .gray-box .columns-title h2 {
-  float: left;
+.page-order-payment .order-info {
+  padding: 60px 0 55px;
+  color: #333;
 }
-.checkout .address-common-table .address-item-list {
-  padding: 30px 13px 0;
-}
-.checkout .address-common-table .address-item-list li {
-  position: relative;
-  overflow: hidden;
-  float: left;
-  width: 276px;
-  height: 158px;
-  margin: 0 0 30px 16px;
-  border: 1px solid #e5e5e5;
-  border-radius: 3px;
-  background: #fafafa;
-  line-height: 14px;
-  text-align: left;
-  word-wrap: break-word;
-  word-break: normal;
-  color: #626262;
-  cursor: pointer;
-  user-select: none;
-}
-.checkout .address-common-table .address-item-list li.selected-address-item {
-  background: #fff;
-  border-color: #6a8fe5;
-}
-.checkout .address-common-table .address-item-list .address-item {
-  padding: 19px 14px 0 19px;
-}
-.checkout .address-common-table .name-section {
-  height: 16px;
-  padding-right: 20px;
-  line-height: 16px;
-  font-size: 16px;
-  color: #666;
-}
-.checkout .address-common-table .mobile-section {
-  height: 14px;
-  padding-top: 17px;
-  line-height: 14px;
-  color: #999;
-}
-.checkout .address-common-table .detail-section {
-  padding-top: 6px;
-  line-height: 24px;
-  color: #999;
-}
-.checkout
-  .address-common-table
-  .address-item-list
-  li.selected-address-item:after {
-  content: "√";
-  display: block;
-  position: absolute;
-  right: 17px;
-  top: 19px;
-  font-size: 24px;
-  color: #6a8fe5;
-}
-.checkout .address-common-table .operation-section {
-  visibility: hidden;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 28px;
-  background: #e1e1e1;
-  border-top: 1px solid #e1e1e1;
-  transform: translate(0, 29px);
-}
-.checkout .address-common-table .operation-section .delete-btn,
-.checkout .address-common-table .operation-section .update-btn {
-  float: left;
-  display: block;
-  height: 28px;
-  background: #fff;
-  text-align: center;
-  line-height: 28px;
-  font-size: 12px;
-  transition: background 0.15s ease;
-}
-.checkout .address-common-table .operation-section .update-btn {
-  width: 137px;
-}
-.checkout .address-common-table .operation-section .delete-btn {
-  float: right;
-  width: 138px;
-}
-.checkout .address-common-table .add-address-item::before {
-  content: "+";
-  display: block;
-  position: absolute;
-  left: 50%;
-  top: 54px;
-  height: 24px;
-  margin-left: -10px;
-  line-height: 24px;
-  text-align: center;
-  font-size: 24px;
-  color: #626262;
-}
-.checkout .address-common-table .add-address-item p {
-  height: 14px;
-  padding-top: 85px;
-  line-height: 14px;
-  text-align: center;
-  color: #999;
-}
-.checkout .address-common-table .address-item-list li:hover {
-  background: #f2f2f2;
-}
-.checkout .invoice-box {
-  padding: 22px 29px 29px 28px;
-}
-.checkout .invoice-box .invoice-detail {
-  position: relative;
-  height: 36px;
+.page-order-payment .order-info h3 {
+  padding-bottom: 14px;
   line-height: 36px;
-  color: #666;
+  text-align: center;
+  font-size: 36px;
+  color: #212121;
 }
-.checkout .invoice-box .radio-box {
-  position: absolute;
-  left: 65px;
-  top: 0;
-  padding: 0;
-  margin: 0;
+.page-order-payment .order-info .payment-detail {
+  text-align: center;
+  line-height: 24px;
+  font-size: 14px;
+  color: #999;
 }
-.checkout .invoice-box .radio-box > label {
-  margin-right: 5px;
+.page-order-payment .order-info .payment-detail span {
+  font-weight: bolder;
+  color: #de4037;
 }
-.checkout .blue-radio {
-  overflow: hidden;
-  display: inline-block;
-  position: relative;
-  top: 2px;
-  width: 10px;
-  height: 10px;
-  padding: 4px;
+.page-order-payment .order-info .payment-detail {
+  text-align: center;
+  line-height: 24px;
+  font-size: 14px;
+  color: #999;
+}
+.page-order-payment .payment-checkout-panel {
+  padding: 10px 10px 10px 0;
+  line-height: 60px;
   background: #f9f9f9;
-  background: linear-gradient(#f5f6f6, #fdfdfd);
-  border: 1px solid #e6e6e6;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) inset;
-  cursor: pointer;
-}
-.checkout .invoice-box .blue-radio {
-  top: 4px;
-  margin: 0 3px 0 6px;
-}
-.checkout .blue-radio-on a,
-.choose-radio-on .blue-radio a {
-  overflow: hidden;
-  display: block;
-  width: 8px;
-  height: 8px;
-  background: #6c94f3;
-  background: linear-gradient(#749af4, #668ef2);
-  border: 1px solid #5d81d9;
-  border-radius: 10px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-.checkout .module-form-row .small-item {
-  width: 180px;
-  height: 36px;
-  border-radius: 4px;
-  line-height: 36px;
-  font-size: 14px;
-}
-.checkout .invoice-box .module-form-row {
-  position: absolute;
-  left: 215px;
-  top: -1px;
-  padding: 0;
-  margin: 0;
-}
-.checkout .module-form-item-wrapper i {
-  position: absolute;
-  left: 15px;
-  top: 0;
-  font-style: normal;
-  font-size: 16px;
-  color: #bebebe;
-}
-.checkout .module-form-row .small-item i {
-  font-size: 14px;
-}
-.checkout .invoice-box .module-form-item-wrapper {
-  width: 338px;
-  height: 34px;
-  line-height: 34px;
-}
-.checkout .module-form-item-wrapper {
-  display: block;
-  position: relative;
-  width: 372px;
-  height: 46px;
-  background-color: #fff;
-  box-shadow: 0 3px 5px -4px rgba(0, 0, 0, 0.4) inset,
-    -1px 0 3px -2px rgba(0, 0, 0, 0.1) inset;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  line-height: 46px;
-  font-size: 16px;
-  opacity: 1;
-  transition: opacity 0.3s ease-in;
-}
-.checkout .invoice-box .module-form-item-wrapper i {
-  left: 11px;
-}
-.checkout .module-form-item-wrapper input {
-  position: relative;
-  z-index: 3;
-  width: 290px;
-  padding: 0 13px 0 15px;
-  background: 0 0;
-  border: none;
-  font-size: 16px;
-  color: #333;
-}
-.checkout .module-form-row .small-item input {
-  padding-left: 15px;
-  margin-top: 8px;
-  width: 137px;
-  font-size: 14px;
-}
-.checkout .invoice-box .module-form-item-wrapper input {
-  width: 310px;
-  padding-left: 11px;
-}
-.checkout .invoice-box .invoice-label {
-  position: relative;
-  padding-top: 25px;
-  margin-top: 11px;
   border-top: 1px solid #e5e5e5;
-  line-height: 12px;
-  text-indent: 10px;
-  font-size: 12px;
-  color: #999;
+  box-sizing: border-box;
 }
-.checkout .gray-box .gray-sub-title {
-  height: 38px;
-  padding: 0 24px;
-  background: #eee;
-  border-top: 1px solid #dbdbdb;
-  border-bottom: 1px solid #dbdbdb;
-  line-height: 38px;
-  font-size: 12px;
-  color: #666;
-}
-.checkout .ui-goods-cart .cart-table-title {
-  padding: 0 0 0 29px;
-  border-top: none;
-  font-size: 12px;
-}
-.checkout .ui-goods-cart .cart-table-title span {
-  float: right;
-  text-align: center;
-}
-.checkout .ui-goods-cart .cart-table-title .name {
-  float: left;
-  text-align: left;
-}
-.ui-goods-cart .cart-table-title .num,
-.ui-goods-cart .cart-table-title .operation,
-.ui-goods-cart .cart-table-title .price,
-.ui-goods-cart .cart-table-title .subtotal {
-  width: 130px;
-  padding-right: 29px;
-  text-align: right;
-}
-.ui-goods-cart .cart-table-title .num {
-  width: 132px;
-}
-.ui-goods-cart .cart-table-title .price {
-  width: 120px;
-}
-.ui-goods-cart .cart-group,
-.ui-goods-cart .cart-items {
-  border-top: 1px solid #ebebeb;
-}
-.ui-goods-cart .cart-items {
-  position: relative;
-  height: 110px;
-  padding-left: 29px;
-  color: #666;
-}
-.ui-goods-cart .cart-group:first-child,
-.ui-goods-cart .cart-items:first-child {
-  border-top: none;
-}
-.ui-goods-cart .cart-items .items-choose,
-.ui-goods-cart .cart-items .items-thumb,
-.ui-goods-cart .cart-items .name {
-  float: left;
-}
-.ui-goods-cart .cart-items .items-thumb,
-.ui-goods-cart .cart-items .items-thumb img {
-  width: 78px;
-  height: 78px;
-  border-radius: 4px;
-}
-.ui-goods-cart .cart-items .items-thumb {
-  margin-top: 15px;
-  border: 1px solid #ebebeb;
-}
-.ui-goods-cart .cart-items .name {
-  display: table;
-  width: 420px;
-  height: 100%;
-  margin-left: 30px;
-  line-height: 24px;
-}
-.ui-goods-cart .cart-items .name-cell {
-  display: table-cell;
-  vertical-align: middle;
-}
-.ui-goods-cart .cart-items .name a {
-  color: #333;
-}
-.ui-goods-cart .cart-items .subtotal {
-  float: right;
-  display: table;
-  width: 129px;
-  height: 100%;
-  padding-right: 29px;
-  text-align: right;
-  line-height: 24px;
-  color: #333;
-}
-.ui-goods-cart .cart-items .subtotal-cell {
-  display: table-cell;
-  vertical-align: middle;
-}
-.ui-goods-cart .cart-items .goods-num,
-.ui-goods-cart .cart-items .operation,
-.ui-goods-cart .cart-items .price,
-.ui-goods-cart .cart-items .select {
-  overflow: hidden;
-  float: right;
-  width: 129px;
-  padding-right: 29px;
-  line-height: 110px;
-  text-align: right;
-  color: #333;
-}
-.ui-goods-cart .cart-items .goods-num {
-  width: 64px;
-  padding: 0 9px 0 90px;
-  text-align: center;
-}
-.ui-goods-cart .cart-items .price {
-  width: 120px;
-}
-.page-order-checkout .order-discount-line {
-  padding: 21px 30px;
-  border-top: 1px solid #ebebeb;
-  line-height: 30px;
-  text-align: right;
-}
-.page-order-checkout .order-discount-line span {
-  float: right;
-  width: 157px;
-}
-.page-order-checkout .last-payment {
-  padding: 22px 29px 19px 30px;
-  background: linear-gradient(#fcfcfc, #f5f5f5);
-  border-top: 1px solid #dadada;
-  box-shadow: -3px 0 8px rgba(0, 0, 0, 0.04);
+.jianguo-blue-main-btn {
+  background: linear-gradient(#6383c6, #4262af);
+  box-shadow: none;
 }
 .blue-main-btn,
 .gray-main-btn,
@@ -588,80 +186,144 @@ export default {
   padding: 1px;
   margin: 0 auto;
   border-radius: 6px;
-  background: #015e94;
   background: linear-gradient(#5598c9, #2a6da2);
   text-align: center;
   text-shadow: rgba(255, 255, 255, 0.496094) 0 1px 0;
   font-family: "Microsoft Yahei", "微软雅黑", "PingFang SC", sans-serif;
   cursor: pointer;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
   user-select: none;
 }
-.jianguo-blue-main-btn {
-  background: #6383c6;
-  background: linear-gradient(#6383c6, #4262af);
-  box-shadow: none;
+.page-order-payment .big-main-btn {
+  float: right;
+  width: 120px;
+  height: 40px;
+  line-height: 40px;
+  margin: 0 0 0 10px;
 }
-.checkout .big-main-btn {
-  height: 46px;
-}
-.page-order-checkout .payment-blue-bt,
-.page-order-checkout .payment-blue-bt a {
-  width: 136px;
-  font-size: 16px;
-}
-.blue-main-btn a,
-.gray-main-btn a,
 .jianguo-blue-main-btn a {
   display: block;
-  padding: 2px 0;
   border-radius: 6px;
-}
-.jianguo-blue-main-btn a {
+  cursor: pointer;
   background: linear-gradient(#6f97e5, #527ed9);
   box-shadow: inset 0 1px 2px #7ea1e8;
   text-shadow: 0 -1px 0 #4f70b3;
   color: #fff;
   transition: all 0.3s ease;
 }
-.checkout .big-main-btn a {
-  height: 42px;
-  line-height: 42px;
-  width: 136px;
+.page-order-payment .big-main-btn a {
+  height: 40px;
+  padding: 0;
+  line-height: 40px;
   font-size: 16px;
 }
 .jianguo-blue-main-btn:hover a {
   box-shadow: inset 0 1px 1px #7696de, inset 0 0 2px #627dca,
     inset 0 -2px 3px #5a77c7, inset 0 0 100px rgba(48, 77, 147, 0.4);
 }
-.page-order-checkout .last-payment .prices {
-  padding: 0 40px;
-  line-height: 50px;
+.page-order-payment .prices {
+  float: right;
+  line-height: 24px;
+  padding: 6px 20px 6px 0;
   font-size: 14px;
 }
-.page-order-checkout .last-payment .prices em {
-  display: inline-block;
-  position: relative;
-  top: 3px;
-  margin-top: -4px;
+.page-order-payment .prices em {
+  margin-left: 5px;
   font-size: 24px;
   color: #d44d44;
 }
-.verify-error {
-  display: block;
-  position: absolute;
-  right: 6px;
-  top: 4px;
-  z-index: 5;
-  padding: 0 9px;
-  border-radius: 5px;
-  line-height: 26px;
+.page-order-payment .confirm-detail {
+  padding: 0 30px 25px;
+  border-top: 1px solid #d5d5d5;
+}
+.page-order-payment .confirm-detail .info-title {
+  height: 14px;
+  padding: 30px 0 17px;
+  line-height: 14px;
+  font-weight: bolder;
+  color: #333;
+}
+.page-order-payment .confirm-detail .info-detail {
+  line-height: 24px;
+  color: #666;
+}
+.page-order-payment .confirm-table-title {
+  padding: 3px 0 0 30px;
+  border-top: 1px solid #d5d5d5;
+  line-height: 54px;
+  font-weight: bolder;
+  color: #000;
+}
+.page-order-payment .confirm-table-title .num,
+.page-order-payment .confirm-table-title .price,
+.page-order-payment .confirm-table-title .subtotal {
+  width: 175px;
+  padding-right: 29px;
+  text-align: right;
+}
+.page-order-payment .confirm-goods-table {
+  padding-left: 30px;
+  border-top: 1px solid #d5d5d5;
+}
+.page-order-payment .cart-items {
+  height: 80px;
+  border-top: 1px solid #d5d5d5;
+}
+.page-order-payment .cart-items:first-child {
+  border-top: none;
+}
+.hide-row {
+  overflow: hidden;
+  word-break: keep-all;
+}
+.page-order-payment .cart-items .name {
+  display: table;
+  width: 540px;
+  height: 100%;
+}
+.page-order-payment .cart-items .name-cell {
+  display: table-cell;
+  line-height: 22px;
+  vertical-align: middle;
+  color: #333;
+}
+.page-order-payment .cart-items .name-cell a {
+  color: #333;
+}
+.page-order-payment .cart-items .goods-num,
+.page-order-payment .cart-items .price,
+.page-order-payment .cart-items .subtotal {
+  width: 175px;
+  padding-right: 29px;
+  line-height: 80px;
+  text-align: right;
+}
+.page-order-payment .cart-items .goods-num {
+  width: 28px;
+  padding-left: 147px;
+  text-align: center;
+}
+.page-order-payment .order-discount-line {
+  padding: 22px 30px 53px;
+  border-top: 1px solid #d5d5d5;
+  line-height: 24px;
+  text-align: right;
   font-size: 12px;
-  font-weight: 400;
-  color: #fff;
-  background: #e66157;
-  opacity: 1;
+}
+.page-order-payment .order-discount-line p:first-child {
+  line-height: 32px;
+  text-align: right;
+  font-size: 14px;
+  font-weight: bolder;
+}
+.is-pay {
+  float: right;
+  width: 120px;
+  height: 40px;
+  line-height: 40px;
+  margin: 0 0 0 10px;
+  display: block;
+  padding: 1px;
+  text-align: center;
+  font-size: 16px;
 }
 </style>

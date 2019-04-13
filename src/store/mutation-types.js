@@ -39,3 +39,6 @@ export const SELECTED_ADDRESS = 'SELECTED_ADDRESS';
 
 // 订单页-默认地址选中
 export const CHECKED_RECEIVEINFO = 'CHECKED_RECEIVEINFO';
+
+// 订单页-提交订单
+export const SUBMIT_ORDER = 'SUBMIT_ORDER';

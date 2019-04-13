@@ -174,7 +174,7 @@ export default {
         items: items
       };
       this.$store.commit('PROVISIONAL_ORDER', provisionalOrder);
-      this.$router.push({ path: 'payment' });
+      this.$router.push({ path: 'checkout' });
     }
   }
 };

@@ -129,6 +129,19 @@ const mutations = {
       });
       item.checked = true;
     }
+  },
+  // 订单页-提交订单
+  [types.SUBMIT_ORDER] (state, data) {
+    let i = state.carPanelData.length;
+    while (i--) {
+      if (state.carPanelData[i].checked) {
+        state.carPanelData.splice(i, 1); // 从购物车中移除
+      }
+    }
+    state.orderData.unshift(data); // 订单页数据内容
+    state.receiveInfo.forEach((receive) => {
+      receive.checked = receive.default; // 地址设置为默认
+    });
   }
 };
 
